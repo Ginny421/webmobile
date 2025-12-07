@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KKU Campus Guide</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: #ffffff;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    header {
+      padding: 2rem 0;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    }
+
+    .header-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .logo-title-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    #logoCanvas {
+      display: block;
+    }
+
+    .title-group {
+      flex: 1;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #1f2937;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #4b5563;
+      margin-top: 0.5rem;
+    }
+
+    .student-info {
+      font-size: 0.875rem;
+      color: #f59e0b;
+      margin-top: 0.75rem;
+    }
+
+    nav {
+      margin-top: 1rem;
+      width: 100%;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    nav a {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .primary-btn {
+      background-color: #f97316;
+      color: #0f172a;
+      border: 2px solid #f97316;
+    }
+
+    .secondary-btn {
+      background-color: transparent;
+      color: #1f2937;
+      border: 2px solid #9ca3af;
+    }
+
+    .secondary-btn:hover {
+      background-color: #f3f4f6;
+    }
+
+    main {
+      padding: 1rem 0 2.5rem;
+    }
+
+    .intro {
+      margin-bottom: 2.5rem;
+    }
+
+    .intro h2 {
+      font-size: 1.5rem;
+      color: #3b82f6;
+      margin-bottom: 0.5rem;
+    }
+
+    .intro p {
+      color: #4b5563;
+      max-width: 900px;
+    }
+
+    .place-card {
+      background-color: #f9fafb;
+      border: 2px solid #3b82f6;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-content {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: #3b82f6;
+      color: #ffffff;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .place-card h3 {
+      font-size: 1.25rem;
+      margin: 0.5rem 0;
+      color: #1f2937;
+    }
+
+    .place-card p {
+      color: #4b5563;
+      margin: 0.5rem 0;
+    }
+
+    .place-card ul {
+      margin-top: 0.5rem;
+      padding-left: 1.5rem;
+      color: #6b7280;
+      font-size: 0.875rem;
+    }
+
+    .place-card li {
+      margin: 0.25rem 0;
+    }
+
+    .images {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .image-wrapper {
+      background-color: #f3f4f6;
+      border: 1px solid #d1d5db;
+      border-radius: 0.75rem;
+      padding: 0.75rem;
+    }
+
+    .image-wrapper svg {
+      width: 100%;
+      border-radius: 0.5rem;
+      display: block;
+    }
+
+    .image-wrapper figcaption {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-top: 0.5rem;
+    }
+
+    .form-section {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 2px solid #3b82f6;
+    }
+
+    .form-section h2 {
+      font-size: 1.75rem;
+      color: #1e40af;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-section > p {
+      color: #4b5563;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #d1d5db;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.3s;
+      background-color: white;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-note {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-top: 0.25rem;
+    }
+
+    .submit-btn {
+      background-color: #3b82f6;
+      color: white;
+      padding: 0.875rem 2rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      background-color: #2563eb;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    footer {
+      border-top: 1px solid #e5e7eb;
+      padding: 1rem 0;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-content p {
+      font-size: 0.875rem;
+      color: #4b5563;
+    }
+
+    .footer-note {
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+    .same-size {
+    width: 300px;
+    height: 180px;
+    object-fit: cover; /* ตัดภาพให้พอดีกรอบ */
+    border-radius: 8px;
+  }
+
+  .image-wrapper svg {
+    width: 300px;
+    height: 180px;
+  }
+
+    @media (min-width: 640px) {
+      .images {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .header-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo-title-wrapper {
+        flex: 1;
+      }
+
+      nav {
+        margin-top: 0;
+        width: auto;
+      }
+
+      nav ul {
+        justify-content: flex-end;
+      }
+
+      .intro h2 {
+        font-size: 1.875rem;
+      }
+
+      .card-content {
+        grid-template-columns: 2fr 3fr;
+        align-items: start;
+      }
+
+      .card-content.reverse {
+        direction: rtl;
+      }
+
+      .card-content.reverse > * {
+        direction: ltr;
+      }
+
+      .place-card h3 {
+        font-size: 1.5rem;
+      }
+
+      .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .submit-btn {
+        width: auto;
+        min-width: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-title-wrapper">
+          <canvas id="logoCanvas" width="80" height="80"></canvas>
+          <div class="title-group">
+            <h1>KKU Campus Guide</h1>
+            <p class="subtitle">แนะนำสถานที่สำคัญภายในมหาวิทยาลัยขอนแก่น</p>
+            <p class="student-info">รหัสนักศึกษา 653040000-0 นายตัวอย่าง ทดสอบ</p>
+          </div>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#complex" class="primary-btn">ศูนย์ประชาคม</a></li>
+            <li><a href="#central-library" class="secondary-btn">หอสมุดกลาง</a></li>
+            <li><a href="#north-gate" class="secondary-btn">ประตูศรีฐาน</a></li>
+            <li><a href="#lake" class="secondary-btn">หนองแวงตราชู</a></li>
+            <li><a href="#suggest-form" class="secondary-btn">แนะนำสถานที่</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="intro">
+        <h2>สำรวจบรรยากาศ KKU Campus</h2>
+        <p>มหาวิทยาลัยขอนแก่นมีพื้นที่กว้างขวางและเต็มไปด้วยสถานที่น่าสนใจ ไม่ว่าจะเป็นศูนย์ประชุมขนาดใหญ่ หอสมุดกลาง ประตูทางเข้าที่เป็นสัญลักษณ์ ไปจนถึงทะเลสาบและพื้นที่พักผ่อนในร่มไม้ เรามาเริ่มทัวร์กันเลย</p>
+      </div>
+
+      <article id="complex" class="place-card">
+        <div class="card-content">
+          <div>
+            <span class="badge">จุดเด่นด้านการประชุม</span>
+            <h3>ศูนย์ประชุมกาญจนาภิเษก</h3>
+            <p>อาคารศูนย์ประชุมขนาดใหญ่ของมหาวิทยาลัยขอนแก่น ใช้สำหรับจัดงานรับปริญญา การประชุมวิชาการ นิทรรศการ และกิจกรรมสำคัญต่าง ๆ ของมหาวิทยาลัย</p>
+            <ul>
+              <li>ใช้จัดพิธีพระราชทานปริญญาบัตร</li>
+              <li>รองรับการประชุมและสัมมนาขนาดใหญ่</li>
+              <li>ใกล้จุดจอดรถโดยสารและรถสองแถว</li>
+            </ul>
+          </div>
+          <div class="images">
+  <div class="images">
+  <img src="./assets/หอประชุม1.png" alt="หอประชุม1.png" class="same-size">
+  <img src="./assets/หอประชุม2.jpeg" alt="หอประชุม1.png" class="same-size">
+</div>
+
+</div>
+
+        </div>
+      </article>
+
+      <article id="central-library" class="place-card">
+        <div class="card-content reverse">
+          <div>
+            <span class="badge">แหล่งค้นคว้าและอ่านหนังสือ</span>
+            <h3>หอสมุดกลาง มหาวิทยาลัยขอนแก่น</h3>
+            <p>หอสมุดกลางเป็นแหล่งรวมหนังสือ ตำรา วารสาร ฐานข้อมูลออนไลน์ และพื้นที่อ่านหนังสือที่สะดวกสบาย</p>
+            <ul>
+              <li>มีพื้นที่อ่านหนังสือหลายโซน</li>
+              <li>ให้บริการคอมพิวเตอร์และอินเทอร์เน็ต</li>
+              <li>มีห้องประชุมย่อยสำหรับทำงานกลุ่ม</li>
+            </ul>
+          </div>
+          <div class="images">
+            <img src="./assets/หอสมุด1.jpeg" alt="หอประชุม1.png" class="same-size">
+            <img src="./assets/หอสมุด2.jpeg" alt="หอประชุม1.png" class="same-size">
+          </div>
+        </div>
+      </article>
+
+      <article id="north-gate" class="place-card">
+        <div class="card-content">
+          <div>
+            <span class="badge">จุดเช็คอินยอดนิยม</span>
+            <h3>ประตูศรีฐาน</h3>
+            <p>ประตูศรีฐานเป็นสัญลักษณ์สำคัญของมหาวิทยาลัยขอนแก่น เป็นทางเข้าสู่เขตมหาวิทยาลัย</p>
+            <ul>
+              <li>จุดเด่นด้วยซุ้มโค้งและป้ายชื่อมหาวิทยาลัย</li>
+              <li>ใกล้ป้ายรถโดยสารสาธารณะ</li>
+              <li>เหมาะสำหรับเป็นจุดนัดพบเพื่อน ๆ</li>
+            </ul>
+          </div>
+          <div class="images">
+            <img src="./assets/ประตูมอ1.jpeg" alt="หอประชุม1.png" class="same-size">
+            <img src="./assets/ประตูมอ2.jpeg" alt="หอประชุม1.png" class="same-size">
+          </div>
+        </div>
+      </article>
+
+      <article id="lake" class="place-card">
+        <div class="card-content reverse">
+          <div>
+            <span class="badge">พื้นที่พักผ่อนและออกกำลังกาย</span>
+            <h3>สวนเกษตร</h3>
+            <p>สวนสาธารณะและพื้นที่สีเขียวภายในมหาวิทยาลัย เหมาะสำหรับการวิ่งออกกำลังกายและการมาพักผ่อน</p>
+            <ul>
+              <li>มีลู่วิ่งและทางเดิน</li>
+              <li>บรรยากาศร่มรื่น มีต้นไม้และสนามหญ้า</li>
+              <li>เหมาะสำหรับพักผ่อนหลังเลิกเรียน</li>
+            </ul>
+          </div>
+          <div class="images">
+            <img src="./assets/สวนเกษตร1.jpeg" alt="หอประชุม1.png" class="same-size">
+            <img src="./assets/สวนเกษตร2.jpeg" alt="หอประชุม1.png" class="same-size">
+          </div>
+        </div>
+      </article>
+
+      <section id="suggest-form" class="form-section">
+        <h2>แนะนำสถานที่ภายใน มข.</h2>
+        <p>มีสถานที่ดี ๆ ที่อยากแนะนำให้เพื่อน ๆ รู้จักไหม? กรอกข้อมูลด้านล่างเพื่อส่งข้อมูลให้เราค่ะ</p>
+        
+        <form action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="8da704fc-8d86-40da-951b-e7e59ad3a64d">
+          
+          <div class="form-group">
+            <label for="place-name">ชื่อสถานที่ *</label>
+            <input type="text" id="place-name" name="place_name" required placeholder="เช่น ศูนย์กีฬา มข.">
+          </div>
+
+          <div class="form-group">
+            <label for="description">รายละเอียดสถานที่ *</label>
+            <textarea id="description" name="message" required placeholder="อธิบายสถานที่ ทำไมควรแนะนำ มีอะไรน่าสนใจบ้าง..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="image-url">URL ภาพที่ 1 *</label>
+            <input type="url" id="image-url" name="image_url" placeholder="https://example.com/image.jpg">
+            <p class="form-note">ใส่ลิงก์รูปภาพของสถานที่ </p>
+          </div>
+
+          <div class="form-group">
+            <label for="image-url">URL ภาพที่ 2 *</label>
+            <input type="url" id="image-url" name="image_url" placeholder="https://example.com/image.jpg">
+            <p class="form-note">ใส่ลิงก์รูปภาพของสถานที่ </p>
+          </div>
+
+
+
+          <button type="submit" class="submit-btn">ส่งข้อมูล</button>
+        </form>
+
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container text-center mt-5 mb-3">
+      <div class="footer-content text-center mt-5 mb-3">
+         <p>
+            © 2025 Mobile Web Application Development — College of Computing, Khon
+            Kaen University
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('logoCanvas');
+    const ctx = canvas.getContext('2d');
+    let bounce = 0;
+    let time = 0;
+
+    function drawLogo() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      time += 0.05;
+      const bounceK1 = Math.sin(time) * 3;
+      const bounceK2 = Math.sin(time + 1) * 3;
+      const bounceU = Math.sin(time + 2) * 3;
+      
+      ctx.font = 'bold 32px Arial, sans-serif';
+      ctx.textBaseline = 'middle';
+      
+      // K ตัวแรก (สีฟ้า)
+      ctx.fillStyle = '#3b82f6';
+      ctx.fillText('K', 5, 40 + bounceK1);
+      
+      // k ตัวที่สอง (สีเขียว)
+      ctx.fillStyle = '#22c55e';
+      ctx.fillText('k', 28, 40 + bounceK2);
+      
+      // u ตัวสุดท้าย (สีแดง)
+      ctx.fillStyle = '#ef4444';
+      ctx.fillText('u', 48, 40 + bounceU);
+      
+      requestAnimationFrame(drawLogo);
+    }
+
+    drawLogo();
+  </script>
+</body>
+</html>
