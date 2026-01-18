@@ -1,0 +1,41 @@
+/* ปรับพื้นหลังทั้งหน้า */
+ion-content {
+  --background: #f4f6f8;
+}
+
+/* Header ด้านบน */
+ion-toolbar {
+  --background: #ffffff;
+  --color: #1e293b;
+}
+
+/* Title หลัก */
+ion-title {
+  font-weight: 600;
+}
+
+/* Title ขนาดเล็ก (ชื่อ + รหัส) */
+ion-title[size="small"] {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #64748b;
+}
+
+/* Floating Action Button (ปุ่มกล้อง) */
+ion-fab-button {
+  --background: #3b82f6;
+  --background-activated: #2563eb;
+  --background-hover: #1d4ed8;
+  --color: #ffffff;
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+}
+
+/* ไอคอนกล้อง */
+ion-fab-button ion-icon {
+  font-size: 24px;
+}
+
+/* Header ตอน scroll ลง */
+ion-header[collapse="condense"] ion-toolbar {
+  --background: #ffffff;
+}
